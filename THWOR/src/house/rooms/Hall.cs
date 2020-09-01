@@ -256,7 +256,8 @@ namespace THWOR.src.rooms
             RoomId id = RoomId.Hall,
             string name = RoomDescriptions.HallName,
             string description = RoomDescriptions.Hall,
-            string firstSearchDescription = RoomDescriptions.hallFirstSearch,
+            string firstSearchDescription = RoomDescriptions.DefaultSearchDescription,
+            //string firstSearchDescription = RoomDescriptions.hallFirstSearch,
             bool hasBeenSearched = false)
             : base(id, name, description, firstSearchDescription, hasBeenSearched)
         {
