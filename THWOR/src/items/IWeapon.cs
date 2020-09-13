@@ -35,7 +35,7 @@
         /// -> TODO: make this an enum
         /// </summary>
         /// <returns></returns>
-        string GetDamageType();
+        DamageType GetDamageType();
 
         /// <summary>
         /// Returns the item's attack verb

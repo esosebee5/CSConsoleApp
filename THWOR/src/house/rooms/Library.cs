@@ -1,4 +1,5 @@
 ﻿using THWOR.src.adventures;
+using THWOR.src.characters;
 using THWOR.src.core.services;
 using THWOR.src.housewithoneroom;
 using THWOR.src.items;
@@ -179,6 +180,7 @@ namespace THWOR.src.core.models.rooms
             {
                 AddItem(new Excalibur());
             }
+            monster = new SimpleMonster("gremlin", 50, 5, DamageType.Blade);
         }
 
         #region Navigation
@@ -186,11 +188,6 @@ namespace THWOR.src.core.models.rooms
         /**************
          * NAVIGATION *
          **************/
-
-        public override bool CanLeave()
-        {
-            return true; // TODO: fill out when MONSTER is implemented
-        }
 
         public override RoomId Go(string direction)
         {
@@ -211,18 +208,7 @@ namespace THWOR.src.core.models.rooms
 
         #region Monster/Combat
 
-        ///**
-        // * If the room itself contains a monster, this returns a reference to that monster
-        // * Used to decide if the player is able to leave a room
-        // * @return reference to the monster contained by the room
-        // */
-        //SimpleMonster getMonster();
-
-        // TODO: probably shouldn't be void...?
-        //public void Attack()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        // So far, all of this is handled by RoomBase
 
         #endregion
 

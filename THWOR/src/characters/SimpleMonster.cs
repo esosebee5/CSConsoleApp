@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using THWOR.src.core.services;
+using THWOR.src.items;
 
 namespace THWOR.src.characters
 {
@@ -93,5 +95,84 @@ namespace THWOR.src.characters
         //}
 
         #endregion
+
+        public readonly string name;
+        private int health;
+        private int strength;
+        private DamageType weakness;
+        private bool dead;
+        private string adjective;
+        ////    private ArrayList<iItem> items;
+
+        public SimpleMonster(string name, int health, int strength, DamageType weakness)
+        {
+
+            // Gremlin, Goblin, Orc, Troll, etc.
+            this.name = name;
+
+            // Damage multiplier value
+            this.strength = strength;
+
+            // Weakness
+            this.weakness = weakness;
+
+            this.health = health;
+            dead = false;
+            SetAdjective(name);
+        }
+
+        private void SetAdjective(string name)
+        {
+            if (IO.StartsWithVowel(name))
+            {
+                adjective = "an";
+            }
+            else
+            {
+                adjective = "a";
+            }
+        }
+
+        public int takeDamage(int damage, List<DamageType> damageTypes)
+        {
+            foreach (DamageType damageType in damageTypes)
+            {
+                if (damageType == weakness)
+                {
+                    damage *= 2;
+                }
+            }
+            health -= damage;
+            if (health <= 0)
+            {
+                health = 0;
+                dead = true;
+            }
+            return damage;
+        }
+
+        public bool isDead()
+        {
+            return dead;
+        }
+
+        public int getStrength()
+        {
+            return strength;
+        }
+
+        public string getName()
+        {
+            return name;
+        }
+
+        /// <summary>
+        /// The adjective + name combo ("an orc")
+        /// </summary>
+        /// <returns></returns>
+        public string getNameLong()
+        {
+            return adjective + " " + name;
+        }
     }
 }

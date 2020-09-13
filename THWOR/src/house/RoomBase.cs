@@ -3,6 +3,7 @@ using THWOR.src.core.services;
 using THWOR.src.items;
 using THWOR.src.titles;
 using System.Collections.Generic;
+using THWOR.src.characters;
 
 namespace THWOR.src.rooms
 {
@@ -124,8 +125,11 @@ namespace THWOR.src.rooms
         private readonly string Name;
         private readonly string Description;
         private readonly string FirstSearchDescription;
+
         protected bool HasBeenSearched;
+        
         public List<IItem> Inventory;
+        public SimpleMonster monster;
 
         #endregion
 
@@ -161,7 +165,19 @@ namespace THWOR.src.rooms
 
         public virtual string GetDescription()
         {
-            return Description;
+            string message = Description;
+            if (monster != null)
+            {
+                if (monster.isDead())
+                {
+                    message += $"\nThere is a dead {monster.name} here.";
+                }
+                else
+                {
+                    message += $"\nThere is {monster.getNameLong()} here.";
+                }
+            }
+            return message;
         }
 
         #endregion
@@ -259,7 +275,10 @@ namespace THWOR.src.rooms
          * NAVIGATION *
          **************/
 
-        public abstract bool CanLeave();
+        public bool CanLeave()
+        {
+            return (monster != null && !monster.isDead()); // TODO: fill out when MONSTER is implemented
+        }
 
         /// <summary>
         /// Must be implemented by the individual room
@@ -272,48 +291,14 @@ namespace THWOR.src.rooms
 
         #region Monster/Combat
 
-        ///**
-        // *
-        // * @return null for now because there is no monster yet
-        // */
-        //public SimpleMonster getMonster()
-        //{
-        //    return null;
-        //}
-
-        //public void attack()
-        //{
-        //    // First, check if there is a monster to fight
-        //    SimpleMonster monster = this.getMonster();
-        //    if (monster == null)
-        //    {
-        //        output(Gamestrings.NothingToAttackHerestring);
-        //        return;
-        //    }
-        //    else if (monster.isDead())
-        //    {
-        //        output("The " + monster.getName() + " is dead.");
-        //    }
-        //    else
-        //    {
-        //        // If a monster exists, attack it
-        //        Shared.attack(monster);
-        //        if (monster.isDead())
-        //        {
-        //            output("You have slain the " + monster.getName() + ".");
-        //        }
-        //        else
-        //        {
-        //            // If the monster is still alive, defend against its attack:
-        //            Shared.defend(monster);
-        //            if (Game.player.isDead())
-        //            {
-        //                Game.state = false;
-        //                output(Game.player.death);
-        //            }
-        //        }
-        //    }
-        //}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public SimpleMonster getMonster()
+        {
+            return monster;
+        }
 
         #endregion
 

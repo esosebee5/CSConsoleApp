@@ -3,7 +3,7 @@
     abstract class WeaponBase : ItemBase, IWeapon
     {
         private readonly int Damage;
-        private readonly string DamageType;
+        private readonly DamageType DamageType;
         private readonly string AttackVerb;
 
         public WeaponBase(
@@ -11,7 +11,7 @@
             string description,
             int size,
             int damage,
-            string damageType,
+            DamageType damageType,
             string attackVerb)
             : base(name, description, size)
         {
@@ -25,7 +25,7 @@
             return Damage;
         }
 
-        public string GetDamageType()
+        public DamageType GetDamageType()
         {
             return DamageType;
         }

@@ -161,11 +161,6 @@ namespace THWOR.src.rooms
          * NAVIGATION *
          **************/
 
-        public override bool CanLeave()
-        {
-            return true; // TODO: fill out when MONSTER is implemented
-        }
-
         public override RoomId Go(string direction)
         {
             var roomId = RoomId.NoRoom;

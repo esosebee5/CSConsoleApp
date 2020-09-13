@@ -18,10 +18,10 @@ namespace THWOR.src.core.services
                 //////////
                 // ROOM //
                 //////////
-                //case "a":
-                //case "attack":
-                    //tryToAttack();
-                    //break;
+                case "a":
+                case "attack":
+                    DisplayMessage(Game.TryToAttack());
+                    break;
                 case "c":
                 case "character":
                     DisplayMessage(Game.Player.ShowCharacterReport());

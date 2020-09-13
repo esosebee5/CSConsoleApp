@@ -21,6 +21,6 @@ namespace THWOR.src.characters
     //    this.drop = drop;
     //}
 
-    #endregion
-}
+        #endregion
+    }
 }

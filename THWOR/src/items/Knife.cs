@@ -65,7 +65,7 @@ namespace THWOR.src.items
             string description = "A small, sharp, folding pocketknife with a wooden handle.",
             int size = 1,
             int damage = 2,
-            string damageType = "blade",
+            DamageType damageType = DamageType.Blade,
             string attackVerb = "slash")
             : base(name, description, size, damage, damageType, attackVerb)
         { }

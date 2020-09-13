@@ -61,7 +61,7 @@ namespace THWOR.src.items
                 "burning slowly but brightly.",
             int size = 1,
             int damage = 10,
-            string damageType = "fire",
+            DamageType damageType = DamageType.Fire,
             string attackVerb = "burn")
             : base(name, description, size, damage, damageType, attackVerb)
         { }

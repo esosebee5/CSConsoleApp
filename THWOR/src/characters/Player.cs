@@ -338,6 +338,10 @@ namespace THWOR.src.characters
         private IItem rHand = null;
         public string death = "You are dead."; // TODO: rename "DeathMessage" & store in GameStrings?
         private bool dead;
+        public bool isDead()
+        {
+            return _health <= 0;
+        }
 
         //private bool limitedInventory = false;
         /**
@@ -724,5 +728,56 @@ namespace THWOR.src.characters
 
         #endregion
 
+        #region Combat
+
+        /// <summary>
+        /// Calculates the total damage from whatever weapons the player has equipped
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public int getDamageModifier()
+        {
+            int retVal = 1;
+            if (GetRHand() != null && GetRHand() is IWeapon rhWeapon) {
+                retVal += rhWeapon.GetDamage();
+            }
+            if (GetLHand() != null && GetLHand() is IWeapon lhWeapon)
+            {
+                retVal += lhWeapon.GetDamage();
+            }
+            return retVal;
+        }
+
+        /**
+         * Check equipped items for damage types
+         * @param player
+         * @return
+         */
+        public List<DamageType> getDamageTypes()
+        {
+            List<DamageType> retVal = new List<DamageType>();
+            if (GetRHand() != null && GetRHand() is IWeapon rhWeapon)
+            {
+                retVal.Add(rhWeapon.GetDamageType());
+            }
+            if (GetLHand() != null && GetLHand() is IWeapon lhWeapon)
+            {
+                retVal.Add(lhWeapon.GetDamageType());
+            }
+            return retVal;
+        }
+
+        public int takeDamage(int damage)
+        {
+            _health -= damage;
+            if (_health <= 0)
+            {
+                _health = 0;
+                dead = true;
+            }
+            return _health;
+        }
+
+        #endregion
     }
 }

@@ -72,7 +72,7 @@ namespace THWOR.src.items
             string description = "The sword has strange runes carved into the blade and a dark jewel set into the pommel.",
             int size = 0,
             int damage = 20,
-            string damageType = "blade",
+            DamageType damageType = DamageType.Blade,
             string attackVerb = "slash")
             : base(name, description, size, damage, damageType, attackVerb)
         { }

@@ -52,5 +52,25 @@ namespace THWOR.src.core.services
             //        String[] infoArray = sanitizedInput.split("\\s+");
             return sanitizedInput.Split(" ");
         }
+
+        /// <summary>
+        /// Check if a specific word starts with a vowel
+        /// - for adjective agreement ("a" vs. "an")
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public static bool StartsWithVowel(string word)
+        {
+            bool retVal = false;
+            if (word.StartsWith('a') ||
+                word.StartsWith('e') ||
+                word.StartsWith('i') ||
+                word.StartsWith('o') ||
+                word.StartsWith('u'))
+            {
+                retVal = true;
+            }
+            return retVal;
+        }
     }
 }
