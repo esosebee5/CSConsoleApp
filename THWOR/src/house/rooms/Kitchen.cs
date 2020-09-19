@@ -56,7 +56,7 @@ namespace THWOR.src.rooms
          **************/
 
         private readonly RoomId[] Neighbors = {
-            RoomId.Hall,
+            RoomId.DiningRoom,
             RoomId.Pantry
         };
 

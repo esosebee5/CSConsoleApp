@@ -247,13 +247,14 @@
             //"'attack' - engage in battle with a hostile entity sharing your room. " +
             "Equipped items will be used to enhance the possible damage you can deal.\n" +
             "'character' - generates a report on the stats, inventory, and equipped items of your player\n" +
-            "'describe' - get current room description\n" +
+            "'describe' - get the current room description\n" +
             "'drop [item]' - put down an item from your inventory\n" +
-            "'equip [item]' - puts an item from your inventory into your hand so that it can be used\n" +
+            "'equip [item]' - put an item from your inventory into your hand so that it can be used\n" +
             "'exit' - 'y' or 'n' to exit the game\n" +
             "'go [direction]' - move into an adjacent room " +
             "(example directions: left, right, forward, back, up, down)\n" +
             "'inventory' - view the items that you have in your inventory\n" +
+            "'pocket [item]' - put an item from your hand back into your inventory\n" +
             "'search' - look around in your current room for items that you can interact with\n" +
 //            "'stats [item]' - view the specified item's stats\n" +
             "'take [item]' - pick up an item that you find in your room\n" +

@@ -127,9 +127,9 @@ namespace THWOR.src.rooms
         private readonly string FirstSearchDescription;
 
         protected bool HasBeenSearched;
+        protected SimpleMonster monster;
         
         public List<IItem> Inventory;
-        public SimpleMonster monster;
 
         #endregion
 
@@ -250,6 +250,17 @@ namespace THWOR.src.rooms
 
                 searchResults += itemsStringList;
             }
+            if (monster != null)
+            {
+                if (monster.isDead())
+                {
+                    searchResults += $"\nThere is a dead {monster.name} here.";
+                }
+                else
+                {
+                    searchResults += $"\nThere is a {monster.name} here.";
+                }
+            }
             //        ArrayList<iItem> itemsInRoom = this.getItems();
             //        if (itemsInRoom.isEmpty())
             //        {
@@ -275,10 +286,28 @@ namespace THWOR.src.rooms
          * NAVIGATION *
          **************/
 
-        public bool CanLeave()
-        {
-            return (monster != null && !monster.isDead()); // TODO: fill out when MONSTER is implemented
-        }
+        //public bool CanLeave()
+        //{
+        //    var canLeave = true;
+
+        //    if (monster != null && !monster.isDead())
+        //    {
+        //        DisplayMonsterInPath();
+        //        canLeave = false;
+        //    }
+
+        //    return canLeave;
+        //}
+
+        //protected virtual void DisplayMonsterInPath()
+        //{
+        //    // if monster
+        //    if (monster != null && !monster.isDead())
+        //    {
+        //        IO.OutputNewLine($"The {monster.name} blocks your path." +
+        //                $"\nYou cannot leave while the {monster.name} is alive.");
+        //    }
+        //}
 
         /// <summary>
         /// Must be implemented by the individual room
@@ -300,35 +329,40 @@ namespace THWOR.src.rooms
             return monster;
         }
 
+        public string GenerateMonster(string name)
+        {
+            string message;
+            if (monster != null && !monster.isDead())
+            {
+                message = $"There is already a {monster.name} here.";
+            }
+            else
+            {
+                var generateSuccessful = false;
+                switch (name)
+                {
+                    case "gremlin":
+                        monster = MonsterFactory.GenerateGremlin();
+                        generateSuccessful = true;
+                        break;
+                }
+                if (generateSuccessful)
+                {
+                    message = $"Generate successful. There is now a {monster.name} here.";
+                }
+                else
+                {
+                    message = "Generate unsuccessful. Try again.";
+                }
+            }
+            return message;
+        }
+
         #endregion
 
         #region CustomMethods
 
         public abstract void PerformCustomMethods(string[] inputs);
-
-        //public void performCustomMethods(string[] inputs)
-        //{
-        //    //        switch (inputs[0]) {
-        //    //            case "s":
-        //    //            case "search":
-        //    //                output(this.search());
-        //    //                break;
-        //    //            default:
-        //    output(Gamestrings.PerformCustomMethodsBadInput);
-        //    //        }
-        //}
-
-        ////    private string search() {
-        ////        ArrayList<IItem> itemsInRoom = this.getItems();
-        ////        if (itemsInRoom.isEmpty()) {
-        ////            return "There are no items to be found here.";
-        ////        }
-        ////        if (!this.hasBeenSearched) {
-        ////            this.hasBeenSearched = true;
-        ////        }
-        ////        return Shared.appendDescriptionToItemsstring(
-        ////                RoomDescriptions.defaultSearchDescription, itemsInRoom);
-        ////    }
 
         #endregion
     }

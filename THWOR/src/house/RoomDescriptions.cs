@@ -193,7 +193,7 @@
             "\nOn your right is a metallic door with a keypad set into the wall beside it." +
             "\nIn front of you is a high, ornately carved arched doorway." +
             "\nThe door to the Study is behind you.";
-        public const string hallFirstSearch = "" +
+        public const string GuardianEntrance = "" +
             "A shadowy figure steps towards you out of the dark corner. The " +
             "face is obscured by a dark cowl and bony hands reach up as if to " +
             "grab you.";

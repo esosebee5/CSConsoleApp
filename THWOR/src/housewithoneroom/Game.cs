@@ -240,16 +240,10 @@ namespace THWOR.src.housewithoneroom
         /// <param name="direction"></param>
         public static void TryGoing(string direction)
         {
-            string message;
-
             // TODO: implement Monster/CanLeave stuff
-            SimpleMonster monster = CurrentRoom.getMonster();
-            if (monster != null && !monster.isDead())
-            {
-                IO.OutputNewLine($"The {monster.name} blocks your path." +
-                    $"\nYou cannot leave while the {monster.name} is alive.");
-            }
-            else
+            // TODO: push monster check into RoomBase???
+            var monster = CurrentRoom.getMonster();
+            if (monster == null || monster.isDead())
             {
                 RoomId roomId = CurrentRoom.Go(direction);
                 if (roomId > RoomId.NoRoom)
@@ -272,16 +266,11 @@ namespace THWOR.src.housewithoneroom
                     }
                 }
             }
-
-
-
-            // Commenting out the below block (don't think it's necessary)
-            //else if (roomId == -99)
-            //{
-            //    // roomId -99 is endGameWin
-            //    // Do nothing; necessary actions have already taken place.
-            //    // Here, it just needs to fall through back to the main loop so that it can exit.
-            //}
+            else
+            {
+                IO.OutputNewLine($"The {monster.name} blocks your path." +
+                    $"\nYou cannot leave while the {monster.name} is alive.");
+            }
         }
 
         /// <summary>
@@ -412,7 +401,7 @@ namespace THWOR.src.housewithoneroom
                     message = CombatService.Attack(monster);
                     if (monster.isDead())
                     {
-                        message += $"\nYou have slain the {monster.name}.";
+                        message += $"\n{monster.deathMessage}";
                     }
                     else
                     {
@@ -428,6 +417,12 @@ namespace THWOR.src.housewithoneroom
             }
 
             return message;
+        }
+
+        public static string GenerateMonster(string name)
+        {
+            // Pass directly into current room
+            return CurrentRoom.GenerateMonster(name);
         }
 
         #endregion

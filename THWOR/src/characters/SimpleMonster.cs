@@ -97,29 +97,53 @@ namespace THWOR.src.characters
         #endregion
 
         public readonly string name;
+        public readonly string deathMessage;
         private int health;
         private int strength;
-        private DamageType weakness;
+        private readonly List<DamageType> weaknesses;
         private bool dead;
         private string adjective;
         ////    private ArrayList<iItem> items;
 
-        public SimpleMonster(string name, int health, int strength, DamageType weakness)
+        public SimpleMonster(
+            string _name,
+            int _health,
+            int _strength,
+            List<DamageType> _weaknesses,
+            string _deathMessage = null
+        )
         {
-
             // Gremlin, Goblin, Orc, Troll, etc.
-            this.name = name;
+            name = _name;
 
             // Damage multiplier value
-            this.strength = strength;
+            strength = _strength;
 
             // Weakness
-            this.weakness = weakness;
+            weaknesses = new List<DamageType>();
+            foreach (DamageType weakness in _weaknesses)
+            {
+                weaknesses.Add(weakness);
+            }
 
-            this.health = health;
+            health = _health;
             dead = false;
-            SetAdjective(name);
+            SetAdjective(_name);
+
+            if (_deathMessage != null && _deathMessage.Length > 0)
+            {
+                deathMessage = _deathMessage;
+            }
+            else
+            {
+                deathMessage = $"You have slain the {name}.";
+            }
         }
+
+        //public SimpleMonster(string name, int health, int strength, List<DamageType> _weaknesses)
+        //{
+        //    new SimpleMonster(name, health, strength, _weaknesses, null);
+        //}
 
         private void SetAdjective(string name)
         {
@@ -137,7 +161,8 @@ namespace THWOR.src.characters
         {
             foreach (DamageType damageType in damageTypes)
             {
-                if (damageType == weakness)
+                var weakness = weaknesses.Find(x => x == damageType);
+                if (weakness != DamageType.NONE)
                 {
                     damage *= 2;
                 }

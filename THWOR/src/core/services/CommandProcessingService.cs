@@ -75,6 +75,16 @@ namespace THWOR.src.core.services
                         DisplayMessage("Try including a direction after 'go'.");
                     }
                     break;
+                case "generate":
+                    if (ValidateNoun(commands))
+                    {
+                        DisplayMessage(Game.GenerateMonster(commands[1]));
+                    }
+                    else
+                    {
+                        DisplayMessage("Name the monster you would like to generate.");
+                    }
+                    break;
                 case "h":
                 case "help":
                     ShowHelpDialogue();

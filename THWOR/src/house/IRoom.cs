@@ -48,7 +48,7 @@ namespace THWOR.src.core.models.rooms
 
         #region Navigation
 
-        bool CanLeave();
+        //bool CanLeave();
 
         /// <summary>
         /// Return roomId if direction is valid, -1 if direction is invalid,
@@ -69,6 +69,8 @@ namespace THWOR.src.core.models.rooms
          * @return reference to the monster contained by the room
          */
         SimpleMonster getMonster();
+
+        string GenerateMonster(string name);
 
         #endregion
 
